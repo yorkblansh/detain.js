@@ -29,7 +29,7 @@ export default defineConfig((configEnv) => ({
 			formats: ['es', 'umd'],
 			entry: resolve('lib', 'detain.umd.tsx'),
 			name: 'ReactFeatureFlag',
-			fileName: (format, entryName) => `detain.${format}.js`,
+			fileName: (format) => `detain.${format}.js`,
 		},
 		rollupOptions: {
 			external: ['react'],

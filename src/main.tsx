@@ -8,7 +8,7 @@ const asyncFunction = <T extends unknown>(data: T): Promise<T> =>
 
 const updateData = async () => {
 	const array = await detain({
-		array: ['3', '2', 1].map((el) => el),
+		array: ['3', '2', 1],
 		delayMs: 500,
 		each: (item) => asyncFunction(Number(item)),
 		onEach: (resolvedValue) => {

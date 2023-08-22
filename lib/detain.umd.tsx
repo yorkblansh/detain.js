@@ -19,11 +19,14 @@ export const detain = async <T extends unknown, R extends unknown>(props: {
 
 	const next = async (): Promise<unknown> => {
 		if (index < array.length) {
-			const maybePromise = each(array[index++], index) as Promise<R>
+			index++
+
+			const item = array[index]
+			const maybePromise = each(item, index) as Promise<R>
 
 			let value: R
 
-			if (maybePromise['then'] !== undefined) {
+			if (maybePromise.then !== undefined) {
 				value = (await maybePromise) as R
 			} else {
 				value = maybePromise as R
@@ -32,9 +35,7 @@ export const detain = async <T extends unknown, R extends unknown>(props: {
 			results.push(value)
 
 			if (onEach) onEach(value)
-			return delay(delayMs).then(() => {
-				return next()
-			})
+			return delay(delayMs).then(next)
 		}
 	}
 

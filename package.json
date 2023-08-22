@@ -1,6 +1,6 @@
 {
 	"name": "detain",
-	"version": "0.0.3",
+	"version": "0.1.0",
 	"description": "use detain",
 	"license": "MIT",
 	"main": "./dist/detain.umd.js",

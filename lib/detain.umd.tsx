@@ -1,17 +1,13 @@
-export const detain = async <
-	LIST extends unknown[],
-	R extends unknown,
-	RTYPE extends Promise<R> | R
->(props: {
-	array: LIST
+export const detain = async <T extends unknown, R extends unknown>(props: {
+	array: T[]
 	delayMs: number
-	each: (item: LIST[0], index: number) => RTYPE
-	onEach?: (r: Awaited<RTYPE>) => void
+	each: (item: T, index: number) => Promise<R> | R
+	onEach?: (item: R) => void
 	onReject?: (reject: unknown) => void
 }) => {
 	const { delayMs, each, array, onEach, onReject } = props
 
-	let results: Awaited<RTYPE>[] = []
+	let results: R[] = []
 
 	const delay = (timeoutDelay: number, data?: string) =>
 		new Promise((resolve, reject) => {
@@ -20,16 +16,17 @@ export const detain = async <
 		})
 
 	let index = 0
+
 	const next = async (): Promise<unknown> => {
 		if (index < array.length) {
 			const maybePromise = each(array[index++], index) as Promise<R>
 
-			let value: Awaited<RTYPE>
+			let value: R
 
 			if (maybePromise['then'] !== undefined) {
-				value = (await maybePromise) as Awaited<RTYPE>
+				value = (await maybePromise) as R
 			} else {
-				value = maybePromise as Awaited<RTYPE>
+				value = maybePromise as R
 			}
 
 			results.push(value)

@@ -3,7 +3,7 @@
 	"version": "0.1.2",
 	"description": "use detain",
 	"license": "MIT",
-	"main": "./dist/detain.js",
+	"main": "./dist/detain.umd.js",
 	"scripts": {
 		"dev": "vite --port 5172 --host",
 		"build": " vite build",
@@ -18,8 +18,8 @@
 	],
 	"exports": {
 		".": {
-			"import": "./dist/detain.js",
-			"require": "./dist/detain.js"
+			"import": "./dist/detain.umd.js",
+			"require": "./dist/detain.umd.js"
 		}
 	},
 	"repository": {

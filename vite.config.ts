@@ -26,10 +26,10 @@ export default defineConfig((configEnv) => ({
 	build: {
 		minify: true,
 		lib: {
-			// formats: ['es'],
+			formats: ['umd'],
 			entry: resolve('lib', 'detain.ts'),
 			name: 'ReactFeatureFlag',
-			fileName: (format) => `detain.js`,
+			fileName: (format) => `detain.umd.js`,
 		},
 		rollupOptions: {
 			external: ['react'],

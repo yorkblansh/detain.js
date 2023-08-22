@@ -1,8 +1,32 @@
 export const detain = async <T extends unknown, R extends unknown>(props: {
+	/**
+	 * Array of data
+	 */
 	array: T[]
+
+	/**
+	 * Delay in milliseconds
+	 */
 	delayMs: number
+
+	/**
+	 * Each value have to be returned
+	 *
+	 * in `Promise` or not:
+	 * ```ts
+	 * Promise<EachReturnType> | EachReturnType
+	 * ```
+	 */
 	each: (item: T, index: number) => Promise<R> | R
+
+	/**
+	 * On each resolved value
+	 */
 	onEach?: (item: R) => void
+
+	/**
+	 * *coming soon*
+	 */
 	onReject?: (reject: unknown) => void
 }) => {
 	const { delayMs, each, array, onEach, onReject } = props

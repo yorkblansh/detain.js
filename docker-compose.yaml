@@ -10,7 +10,7 @@ services:
       context: ./
       dockerfile: ./Dockerfile.dev
     ports:
-      - 5172:5172
+      - 5174:5172
     volumes:
       - ./:/app
     tty: true

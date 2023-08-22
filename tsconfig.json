@@ -17,7 +17,7 @@
 		"jsx": "react-jsx",
 		"baseUrl": ".",
 		"paths": {
-			"@detain.js": ["lib/detain.umd.tsx"]
+			"@detain.js": ["lib/detain.ts"]
 		},
 		"declaration": true,
 		"pretty": true

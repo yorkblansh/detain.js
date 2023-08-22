@@ -16,7 +16,7 @@ export default defineConfig((configEnv) => ({
 		// }),
 		dts({
 			insertTypesEntry: true,
-			include: ['lib/detain.umd.tsx'],
+			include: ['lib/detain.ts'],
 			beforeWriteFile: (filePath, content) => ({
 				filePath: filePath.replace('/lib', ''),
 				content,
@@ -26,10 +26,10 @@ export default defineConfig((configEnv) => ({
 	build: {
 		minify: true,
 		lib: {
-			formats: ['es', 'umd'],
-			entry: resolve('lib', 'detain.umd.tsx'),
+			// formats: ['es'],
+			entry: resolve('lib', 'detain.ts'),
 			name: 'ReactFeatureFlag',
-			fileName: (format) => `detain.${format}.js`,
+			fileName: (format) => `detain.js`,
 		},
 		rollupOptions: {
 			external: ['react'],

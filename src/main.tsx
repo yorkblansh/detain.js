@@ -1,7 +1,7 @@
 import { StrictMode, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import './scss/index.scss'
-import { detain } from '@detain.js'
+import { detain } from 'lib/detain.js'
 
 const asyncFunction = <T extends unknown>(data: T): Promise<T> =>
 	new Promise((res) => res(data))

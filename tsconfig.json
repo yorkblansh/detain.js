@@ -17,11 +17,11 @@
 		"jsx": "react-jsx",
 		"baseUrl": ".",
 		"paths": {
-			"@detain.js": ["lib/detain.ts"]
+			"@detain": ["./src/detain.ts"]
 		},
 		"declaration": true,
 		"pretty": true
 	},
-	"include": ["./src", "./lib"],
+	"include": ["./example", "./src"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

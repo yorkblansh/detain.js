@@ -14,21 +14,25 @@ export default defineConfig((configEnv) => ({
 		// 	linters: [new EsLinter({ configEnv })],
 		// }),
 		dts({
+			exclude: [resolve('example')],
 			insertTypesEntry: true,
-			include: ['lib/detain.ts'],
+			// include: ['src/detain.ts'],
 			beforeWriteFile: (filePath, content) => ({
-				filePath: filePath.replace('/lib', ''),
+				filePath: filePath.replace('/src', ''),
 				content,
 			}),
 		}),
 	],
+	base: '/example',
 	build: {
-		minify: true,
+		outDir: 'lib',
+		sourcemap: true,
+		minify: false,
 		lib: {
-			formats: ['umd'],
-			entry: resolve('lib', 'detain.ts'),
+			formats: ['es'],
+			entry: resolve('src', 'detain.ts'),
 			name: 'ReactFeatureFlag',
-			fileName: (format) => `detain.umd.js`,
+			fileName: () => `detain.js`,
 		},
 		rollupOptions: {
 			external: ['react'],

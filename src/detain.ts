@@ -1,8 +1,11 @@
-export const detain = async <T extends unknown, R extends unknown>(props: {
+export async function detain<
+	InitialValue extends unknown,
+	ResultValue extends unknown
+>(props: {
 	/**
 	 * Array of data
 	 */
-	array: T[]
+	array: InitialValue[]
 
 	/**
 	 * Delay in milliseconds
@@ -17,21 +20,24 @@ export const detain = async <T extends unknown, R extends unknown>(props: {
 	 * Promise<EachReturnType> | EachReturnType
 	 * ```
 	 */
-	each: (item: T, index: number) => Promise<R> | R
+	each: (
+		item: InitialValue,
+		index: number
+	) => Promise<ResultValue> | ResultValue
 
 	/**
 	 * On each resolved value
 	 */
-	onEach?: (item: R) => void
+	onEach?: (item: ResultValue) => void
 
 	/**
 	 * *coming soon*
 	 */
 	onReject?: (reject: unknown) => void
-}) => {
+}) {
 	const { delayMs, each, array, onEach, onReject } = props
 
-	let results: R[] = []
+	let results: ResultValue[] = []
 
 	const delay = (timeoutDelay: number, data?: string) =>
 		new Promise((resolve, reject) => {
@@ -43,17 +49,17 @@ export const detain = async <T extends unknown, R extends unknown>(props: {
 
 	const next = async (): Promise<unknown> => {
 		if (index < array.length) {
+			const item = array[index]
+			const maybePromise = each(item, index) as Promise<ResultValue>
+
 			index++
 
-			const item = array[index]
-			const maybePromise = each(item, index) as Promise<R>
-
-			let value: R
+			let value: ResultValue
 
 			if (maybePromise.then !== undefined) {
-				value = (await maybePromise) as R
+				value = (await maybePromise) as ResultValue
 			} else {
-				value = maybePromise as R
+				value = maybePromise as ResultValue
 			}
 
 			results.push(value)

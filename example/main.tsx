@@ -3,17 +3,19 @@ import ReactDOM from 'react-dom'
 import './scss/index.scss'
 import { detain } from '@detain'
 
-const asyncFunction = <T extends unknown>(data: T): Promise<T> =>
-	new Promise((res) => res(data))
+const asyncFunction = <T extends unknown>(data: T, index: number): Promise<T> =>
+	new Promise((res) =>
+		setTimeout(() => {
+			res(data)
+		}, index)
+	)
 
 const updateData = async () => {
 	const array = await detain({
-		array: ['1', 2, 8, 155],
+		array: [1, 2, 3, 4].map(asyncFunction),
 		delayMs: 1000,
-		each: (item) => {
-			console.log({ item })
-
-			return asyncFunction(Number(item))
+		each: (item, index) => {
+			return item
 		},
 		onEach: (resolvedValue) => {
 			console.log(resolvedValue)

@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "use detain",
 	"license": "MIT",
-	"main": "./dist/detain.umd.js",
+	"main": "./lib/detain.js",
 	"scripts": {
 		"dev": "vite --port 5172 --host",
 		"build": " vite build",
@@ -14,12 +14,12 @@
 		"ci": "yarn lint && yarn type-check"
 	},
 	"files": [
-		"dist"
+		"lib"
 	],
 	"exports": {
 		".": {
-			"import": "./dist/detain.umd.js",
-			"require": "./dist/detain.umd.js"
+			"import": "./lib/detain.js",
+			"require": "./lib/detain.js"
 		}
 	},
 	"repository": {
@@ -36,17 +36,17 @@
 		"react": ">=17.x"
 	},
 	"devDependencies": {
-		"@types/node": "20.10.4",
-		"@types/react": "18.2.43",
-		"@types/react-dom": "18.2.17",
+		"@types/node": "20.10.5",
+		"@types/react": "18.2.45",
+		"@types/react-dom": "18.2.18",
 		"@vitejs/plugin-react": "4.2.1",
 		"babel-eslint": "10.1.0",
-		"eslint": "8.55.0",
+		"eslint": "8.56.0",
 		"eslint-config-react-app": "7.0.1",
 		"eslint-config-standard": "17.1.0",
 		"eslint-config-standard-jsx": "11.0.0",
 		"eslint-config-standard-react": "13.0.0",
-		"eslint-plugin-import": "2.29.0",
+		"eslint-plugin-import": "2.29.1",
 		"eslint-plugin-node": "11.1.0",
 		"eslint-plugin-promise": "6.1.1",
 		"eslint-plugin-react": "7.33.2",
@@ -54,8 +54,8 @@
 		"react-dom": "18.2.0",
 		"sass": "^1.69.5",
 		"typescript": "5.3.3",
-		"vite": "5.0.7",
-		"vite-plugin-dts": "3.6.4",
+		"vite": "5.0.10",
+		"vite-plugin-dts": "3.7.0",
 		"vite-plugin-linter": "2.0.7",
 		"vite-tsconfig-paths": "4.2.2"
 	},

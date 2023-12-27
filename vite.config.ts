@@ -26,7 +26,7 @@ export default defineConfig((configEnv) => ({
 	base: '/example',
 	build: {
 		outDir: 'lib',
-		sourcemap: true,
+		sourcemap: false,
 		minify: false,
 		lib: {
 			formats: ['es'],

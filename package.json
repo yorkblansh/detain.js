@@ -1,6 +1,6 @@
 {
 	"name": "detain",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"description": "use detain",
 	"license": "MIT",
 	"main": "./lib/detain.js",

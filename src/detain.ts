@@ -33,15 +33,21 @@ export async function detain<
 	/**
 	 * *coming soon*
 	 */
-	onReject?: (reject: unknown) => void
+	// onReject?: (reject: unknown) => void
 }) {
-	const { delayMs, each, array, onEach, onReject } = props
+	const {
+		delayMs,
+		each,
+		array,
+		onEach,
+		// onReject
+	} = props
 
 	let results: ResultValue[] = []
 
 	const delay = (timeoutDelay: number, data?: string) =>
 		new Promise((resolve, reject) => {
-			if (onReject) onReject(reject)
+			// if (onReject) onReject(reject)
 			setTimeout(resolve.bind(null, data), timeoutDelay)
 		})
 

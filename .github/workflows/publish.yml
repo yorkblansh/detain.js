@@ -1,0 +1,59 @@
+name: Publish
+on:
+  workflow_run:
+    workflows: [CI]
+    branches: [master]
+    types: [completed]
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  publish:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js ⚙️
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'yarn'
+
+      - name: Install dependencies 📦
+        run: yarn install --frozen-lockfile
+
+      - name: Create Release Pull Request or Publish
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: npm run release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - uses: nyaa8/package-version@v1
+        # with:
+        # path: '../../package.json' # Optional
+        # follow-symlinks: 'false' # Optional
+      - name: Set and Retrieve Github ENV variables
+        shell: bash
+        run: |
+          # define variables      
+          semver=${{ env.PACKAGE_VERSION }} | awk 'BEGIN {FS=OFS="."} NF--' 
+
+          # # set them as GitHub ENV variables
+          echo "Semver=$semver" >> $GITHUB_ENV
+
+          # # retrieve these GitHub ENV variables
+          echo "$semver"
+          echo "current version is $semver"
+
+      - name: Bump version and push tag
+        uses: laputansoft/github-tag-action@v4.6
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ env.PACKAGE_VERSION }}
